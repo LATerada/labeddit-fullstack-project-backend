@@ -1,6 +1,9 @@
 import { UserDatabase } from "../database/UserDatabase";
+import { LoginInputDTO, LoginOutputDTO } from "../dtos/user/login.dto";
 import { SignupInputDTO, SignupOutputDTO } from "../dtos/user/signup.dto";
+import { BadRequestError } from "../errors/BadRequestError";
 import { ConflictError } from "../errors/ConflictError";
+import { NotFoundError } from "../errors/NotFoundError";
 import { TokenPayload, User, USER_ROLES } from "../models/User";
 import { HashManager } from "../services/HashManeger";
 import { IdGenerator } from "../services/IdGenerator";
@@ -47,6 +50,48 @@ export class UserBusiness {
     const token = this.tokenManeger.createToken(payload);
 
     const output: SignupOutputDTO = {
+      token,
+    };
+
+    return output;
+  };
+
+  public login = async (input: LoginInputDTO): Promise<LoginOutputDTO> => {
+    const { email, password } = input;
+
+    const userDBExists = await this.userDatabase.findUserByEmail(email);
+
+    if (!userDBExists) {
+      throw new BadRequestError("email or password invalid");
+    }
+
+    const user = new User(
+      userDBExists.id,
+      userDBExists.name,
+      userDBExists.email,
+      userDBExists.password,
+      userDBExists.role,
+      userDBExists.created_at
+    );
+
+    const hashedPassword = this.hashManeger.compare(
+      password,
+      userDBExists.password
+    );
+
+    if (!hashedPassword) {
+      throw new BadRequestError("email or password invalid");
+    }
+
+    const payload: TokenPayload = {
+      id: user.getId(),
+      name: user.getName(),
+      role: user.getRole(),
+    };
+
+    const token = this.tokenManeger.createToken(payload);
+
+    const output: LoginOutputDTO = {
       token,
     };
 
