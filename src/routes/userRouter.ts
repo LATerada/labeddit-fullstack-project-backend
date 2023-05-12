@@ -16,3 +16,5 @@ const userController = new UserController(
     new HashManager()
   )
 );
+
+userRouter.post("/", userController.signup);
