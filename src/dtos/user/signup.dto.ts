@@ -7,3 +7,7 @@ export const SignupSchema = z.object({
 });
 
 export type SignupInputDTO = z.infer<typeof SignupSchema>;
+
+export interface SignupOutputDTO {
+  token: string;
+}
