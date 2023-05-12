@@ -18,3 +18,4 @@ const userController = new UserController(
 );
 
 userRouter.post("/", userController.signup);
+userRouter.post("/", userController.login);
