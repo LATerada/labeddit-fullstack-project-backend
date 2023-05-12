@@ -7,4 +7,6 @@ export const CreatePostSchema = z.object({
 
 export type CreatePostInputDTO = z.infer<typeof CreatePostSchema>;
 
-export type CreatePostOutputDTO = undefined;
+export interface CreatePostOutputDTO {
+  message: "Post created";
+}

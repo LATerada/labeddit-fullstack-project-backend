@@ -7,4 +7,6 @@ export const GetPostsSchema = z.object({
 
 export type GetPostsInputDTO = z.infer<typeof GetPostsSchema>;
 
-export type GetPostsOutputDTO = PostModel[];
+export interface GetPostsOutputDTO {
+  posts: PostModel[];
+}

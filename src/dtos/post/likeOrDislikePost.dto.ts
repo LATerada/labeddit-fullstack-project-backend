@@ -8,4 +8,6 @@ export const LikeOrDislikePostSchema = z.object({
 
 export type LikeOrDislikePostInputDTO = z.infer<typeof LikeOrDislikePostSchema>;
 
-export type LikeOrDislikePostOutputDTO = undefined;
+export interface LikeOrDislikePostOutputDTO {
+  message: "Liked or Disliked";
+}

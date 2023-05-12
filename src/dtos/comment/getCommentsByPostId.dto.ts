@@ -8,4 +8,6 @@ export const GetCommentsSchema = z.object({
 
 export type GetCommentsInputDTO = z.infer<typeof GetCommentsSchema>;
 
-export type GetCommentsOutputDTO = CommentModel[];
+export interface GetCommentsOutputDTO {
+  comments: CommentModel[];
+}

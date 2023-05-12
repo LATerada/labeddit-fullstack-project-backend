@@ -6,6 +6,10 @@ export const LikeOrDislikeCommentSchema = z.object({
   like: z.boolean(),
 });
 
-export type LikeOrDislikeCommentInputDTO = z.infer<typeof LikeOrDislikeCommentSchema>;
+export type LikeOrDislikeCommentInputDTO = z.infer<
+  typeof LikeOrDislikeCommentSchema
+>;
 
-export type LikeOrDislikeCommentOutputDTO = undefined;
+export interface LikeOrDislikeCommentOutputDTO {
+  message: "Liked or Disliked";
+}

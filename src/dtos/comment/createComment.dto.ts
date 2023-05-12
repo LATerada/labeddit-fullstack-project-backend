@@ -8,4 +8,6 @@ export const CreateCommentSchema = z.object({
 
 export type CreateCommentInputDTO = z.infer<typeof CreateCommentSchema>;
 
-export type CreateCommentOutputDTO = undefined;
+export interface CreateCommentOutputDTO {
+  message: "Comment created";
+}

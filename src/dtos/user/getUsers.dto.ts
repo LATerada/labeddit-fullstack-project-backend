@@ -8,4 +8,6 @@ export const GetUsersSchema = z.object({
 
 export type GetUsersInputDTO = z.infer<typeof GetUsersSchema>;
 
-export type GetUsersOutputDTO = UserModel[];
+export interface GetUsersOutputDTO {
+  users: UserModel[];
+}
