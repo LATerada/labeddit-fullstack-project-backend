@@ -3,6 +3,7 @@ import {
   CreatePostInputDTO,
   CreatePostOutputDTO,
 } from "../dtos/post/createPost.dto";
+import { GetPostsInputDTO, GetPostsOutputDTO } from "../dtos/post/getPosts.dto";
 import { UnauthorizedError } from "../errors/UnaouthorizedError";
 import { Post } from "../models/Post";
 import { IdGenerator } from "../services/IdGenerator";
@@ -45,6 +46,42 @@ export class PostBusiness {
 
     const output: CreatePostOutputDTO = {
       message: "Post created",
+    };
+
+    return output;
+  };
+
+  public getPosts = async (
+    input: GetPostsInputDTO
+  ): Promise<GetPostsOutputDTO> => {
+    const { token } = input;
+
+    const payload = this.tokenManeger.getPayload(token);
+
+    if (!payload) {
+      throw new UnauthorizedError("Invalid token");
+    }
+
+    const postsDDWithCreatorName =
+      await this.PostDatabase.findPostsWithCreatorName();
+
+    const posts = postsDDWithCreatorName.map((postDDWithCreatorName) => {
+      const post = new Post(
+        postDDWithCreatorName.id,
+        postDDWithCreatorName.post_content,
+        postDDWithCreatorName.likes,
+        postDDWithCreatorName.dislikes,
+        postDDWithCreatorName.comments,
+        postDDWithCreatorName.created_at,
+        postDDWithCreatorName.updated_at,
+        postDDWithCreatorName.creator_id,
+        postDDWithCreatorName.creator_name
+      );
+      return post.toBusinessModel();
+    });
+
+    const output: GetPostsOutputDTO = {
+      posts,
     };
 
     return output;
