@@ -11,5 +11,6 @@ const postController = new PostController(
   new PostBusiness(new PostDatabase(), new IdGenerator(), new TokenManager())
 );
 
-postRouter.post("/", postController.createPost)
-postRouter.get("/", postController.getPosts)
+postRouter.post("/", postController.createPost);
+postRouter.get("/", postController.getPosts);
+postRouter.post("/", postController.likeOrDislikePost);
