@@ -13,4 +13,4 @@ const postController = new PostController(
 
 postRouter.post("/", postController.createPost);
 postRouter.get("/", postController.getPosts);
-postRouter.post("/", postController.likeOrDislikePost);
+postRouter.put("/:id/like", postController.likeOrDislikePost);

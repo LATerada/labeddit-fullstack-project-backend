@@ -31,6 +31,7 @@ export class PostController {
       }
     }
   };
+  
   public getPosts = async (req: Request, res: Response) => {
     try {
       const input = GetPostsSchema.parse({
