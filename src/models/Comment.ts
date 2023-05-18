@@ -7,28 +7,6 @@ export interface CommentDB {
   created_at: string;
 }
 
-export interface CommentDBWithCreatorName {
-  id: string;
-  creator_id: string;
-  comment_content: string;
-  likes: number;
-  dislikes: number;
-  created_at: string;
-  creator_name: string;
-}
-
-export interface CommentModel {
-  id: string;
-  commentContent: string;
-  likes: number;
-  dislikes: number;
-  createdAt: string;
-  creator: {
-    id: string;
-    name: string;
-  };
-}
-
 export interface LikeDislikeCommentDB {
   post_id: string;
   comment_id: string;
@@ -45,6 +23,16 @@ export interface PostCommentDB {
   comment_id: string;
 }
 
+export interface PostCommentModel {
+  postId: string;
+  creatorId: string;
+  name: number;
+  commentId: number;
+  commentContent: string;
+  likes: string;
+  dislikes: string;
+}
+
 export class Comment {
   constructor(
     private id: string,
@@ -52,7 +40,6 @@ export class Comment {
     private likes: number,
     private dislikes: number,
     private createdAt: string,
-
     private creatorId: string,
     private creatorName: string
   ) {}
@@ -120,20 +107,6 @@ export class Comment {
       likes: this.likes,
       dislikes: this.dislikes,
       created_at: this.createdAt,
-    };
-  }
-
-  public toBusinessModel(): CommentModel {
-    return {
-      id: this.id,
-      commentContent: this.commentContent,
-      likes: this.likes,
-      dislikes: this.dislikes,
-      createdAt: this.createdAt,
-      creator: {
-        id: this.creatorId,
-        name: this.creatorName,
-      },
     };
   }
 }

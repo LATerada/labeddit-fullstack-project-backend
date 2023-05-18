@@ -1,11 +1,13 @@
-import { NotBeforeError } from "jsonwebtoken";
 import { CommentDatabase } from "../database/CommentDatabase";
 import { PostDatabase } from "../database/PostDatabase";
 import {
   CreateCommentInputDTO,
   CreateCommentOutputDTO,
 } from "../dtos/comment/createComment.dto";
-import { ForbiddenError } from "../errors/ForbiddenError";
+import {
+  GetCommentsInputDTO,
+  GetCommentsOutputDTO,
+} from "../dtos/comment/getCommentsByPostId.dto";
 import { NotFoundError } from "../errors/NotFoundError";
 import { UnauthorizedError } from "../errors/UnaouthorizedError";
 import { Comment, PostCommentDB } from "../models/Comment";
@@ -63,7 +65,6 @@ export class CommentBusiness {
 
     await this.commentDatabase.insertPostComment(newPostCommentDB);
 
-    console.log(postIdExists)
     const updatePostIdExists = new Post(
       postIdExists.id,
       postIdExists.post_content,
@@ -76,13 +77,42 @@ export class CommentBusiness {
     );
 
     updatePostIdExists.addComment();
-    console.log(postIdExists)
 
     const updatePostIdExistsDB = updatePostIdExists.toDBModel();
     await this.postDatabase.editPost(updatePostIdExistsDB);
 
     const output: CreateCommentOutputDTO = {
       message: "Comment created",
+    };
+
+    return output;
+  };
+
+  public getCommentsByPostId = async (
+    input: GetCommentsInputDTO
+  ): Promise<GetCommentsOutputDTO> => {
+    const { token, postId } = input;
+
+    const payload = this.tokenManeger.getPayload(token);
+
+    if (!payload) {
+      throw new UnauthorizedError("Invalid token");
+    }
+
+    const postIdExists = await this.postDatabase.findPostsWithCreatorNameById(
+      postId
+    );
+
+    if (!postIdExists) {
+      throw new NotFoundError("Invalid post id");
+    }
+
+    const postComments = await this.commentDatabase.findCommentsByPostId(
+      postId
+    );
+
+    const output: GetCommentsOutputDTO = {
+      comments: postComments,
     };
 
     return output;
