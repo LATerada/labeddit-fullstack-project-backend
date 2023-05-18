@@ -82,7 +82,7 @@ export class PostDatabase extends BaseDatabase {
 
     if (result === undefined) {
       return undefined;
-    } else if (result.like == 1) {
+    } else if (result.like === 1) {
       return POST_LIKE.ALREADY_LIKED;
     } else {
       return POST_LIKE.ALREADY_DISLIKED;
