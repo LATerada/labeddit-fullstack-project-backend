@@ -142,7 +142,7 @@ export class PostBusiness {
         await this.postDatabase.removeLikeOrDislike(likeOrDislikeDB);
         post.removeLike();
       } else {
-        await this.postDatabase.insertLikeOrDislike(likeOrDislikeDB);
+        await this.postDatabase.updateLikeOrDislike(likeOrDislikeDB);
         post.removeLike();
         post.addDislike();
       }
@@ -151,7 +151,7 @@ export class PostBusiness {
         await this.postDatabase.removeLikeOrDislike(likeOrDislikeDB);
         post.removeDislike();
       } else {
-        await this.postDatabase.insertLikeOrDislike(likeOrDislikeDB);
+        await this.postDatabase.updateLikeOrDislike(likeOrDislikeDB);
         post.removeDislike();
         post.addLike();
       }

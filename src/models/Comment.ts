@@ -8,7 +8,7 @@ export interface CommentDB {
 }
 
 export interface LikeDislikeCommentDB {
-  post_id: string;
+  user_id: string;
   comment_id: string;
   like: number;
 }
@@ -41,7 +41,6 @@ export class Comment {
     private dislikes: number,
     private createdAt: string,
     private creatorId: string,
-    private creatorName: string
   ) {}
 
   public getId(): string {
@@ -90,13 +89,6 @@ export class Comment {
   }
   public setCreatorId(value: string) {
     this.creatorId = value;
-  }
-
-  public getCreatorName(): string {
-    return this.creatorName;
-  }
-  public setCreatorName(value: string) {
-    this.creatorName = value;
   }
 
   public toDBModel(): CommentDB {
