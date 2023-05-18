@@ -61,7 +61,9 @@ CREATE TABLE
 
 DROP TABLE post_comments;
 
-DROP TABLE likes_dislikes;
+DROP TABLE likes_dislikes_post;
+
+DROP TABLE likes_dislikes_comment;
 
 DROP TABLE comments;
 
