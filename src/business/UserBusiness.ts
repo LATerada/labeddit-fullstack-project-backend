@@ -21,7 +21,7 @@ export class UserBusiness {
 
     const userDBExists = await this.userDatabase.findUserByEmail(email);
 
-    if (!userDBExists) {
+    if (userDBExists) {
       throw new ConflictError("email already exists");
     }
 
