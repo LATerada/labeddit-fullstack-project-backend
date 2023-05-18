@@ -131,7 +131,7 @@ export class PostBusiness {
     const likeOrDislikePostExists =
       await this.postDatabase.findLikeOrDislikePost(likeOrDislikeDB);
 
-    if (post.getCreatorId() !== payload.id) {
+    if (post.getCreatorId() == payload.id) {
       throw new ForbiddenError(
         "The post creator can not give likes or dislikes"
       );
