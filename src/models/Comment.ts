@@ -5,7 +5,6 @@ export interface CommentDB {
   likes: number;
   dislikes: number;
   created_at: string;
-  updated_at: string;
 }
 
 export interface CommentDBWithCreatorName {
@@ -15,7 +14,6 @@ export interface CommentDBWithCreatorName {
   likes: number;
   dislikes: number;
   created_at: string;
-  updated_at: string;
   creator_name: string;
 }
 
@@ -25,7 +23,6 @@ export interface CommentModel {
   likes: number;
   dislikes: number;
   createdAt: string;
-  updatedAt: string;
   creator: {
     id: string;
     name: string;
@@ -55,7 +52,7 @@ export class Comment {
     private likes: number,
     private dislikes: number,
     private createdAt: string,
-    private updatedAt: string,
+
     private creatorId: string,
     private creatorName: string
   ) {}
@@ -101,13 +98,6 @@ export class Comment {
     return this.createdAt;
   }
 
-  public getUdatedAt(): string {
-    return this.updatedAt;
-  }
-  public setUpdatedAt(value: string) {
-    this.updatedAt = value;
-  }
-
   public getCreatorId(): string {
     return this.creatorId;
   }
@@ -130,7 +120,6 @@ export class Comment {
       likes: this.likes,
       dislikes: this.dislikes,
       created_at: this.createdAt,
-      updated_at: this.updatedAt,
     };
   }
 
@@ -141,7 +130,6 @@ export class Comment {
       likes: this.likes,
       dislikes: this.dislikes,
       createdAt: this.createdAt,
-      updatedAt: this.updatedAt,
       creator: {
         id: this.creatorId,
         name: this.creatorName,

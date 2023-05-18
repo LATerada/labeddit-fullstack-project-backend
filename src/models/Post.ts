@@ -6,7 +6,6 @@ export interface PostDB {
   dislikes: number;
   comments: number;
   created_at: string;
-  updated_at: string;
 }
 
 export interface PostDBWithCreatorName {
@@ -28,7 +27,6 @@ export interface PostModel {
   dislikes: number;
   comments: number;
   createdAt: string;
-  updatedAt: string;
   creator: {
     id: string;
     name: string;
@@ -54,7 +52,6 @@ export class Post {
     private dislikes: number,
     private comments: number,
     private createdAt: string,
-    private updatedAt: string,
     private creatorId: string,
     private creatorName: string
   ) {}
@@ -113,13 +110,6 @@ export class Post {
     return this.createdAt;
   }
 
-  public getUdatedAt(): string {
-    return this.updatedAt;
-  }
-  public setUpdatedAt(value: string) {
-    this.updatedAt = value;
-  }
-
   public getCreatorId(): string {
     return this.creatorId;
   }
@@ -143,7 +133,6 @@ export class Post {
       dislikes: this.dislikes,
       comments: this.comments,
       created_at: this.createdAt,
-      updated_at: this.updatedAt,
     };
   }
 
@@ -155,7 +144,6 @@ export class Post {
       dislikes: this.dislikes,
       comments: this.comments,
       createdAt: this.createdAt,
-      updatedAt: this.updatedAt,
       creator: {
         id: this.creatorId,
         name: this.creatorName,

@@ -41,7 +41,6 @@ export class PostBusiness {
       0,
       0,
       new Date().toISOString(),
-      new Date().toISOString(),
       payload.id,
       payload.name
     );
@@ -79,7 +78,6 @@ export class PostBusiness {
         postDDWithCreatorName.dislikes,
         postDDWithCreatorName.comments,
         postDDWithCreatorName.created_at,
-        postDDWithCreatorName.updated_at,
         postDDWithCreatorName.creator_id,
         postDDWithCreatorName.creator_name
       );
@@ -118,7 +116,6 @@ export class PostBusiness {
       postDDWithCreatorName.dislikes,
       postDDWithCreatorName.comments,
       postDDWithCreatorName.created_at,
-      postDDWithCreatorName.updated_at,
       postDDWithCreatorName.creator_id,
       postDDWithCreatorName.creator_name
     );
