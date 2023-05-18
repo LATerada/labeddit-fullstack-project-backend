@@ -9,6 +9,7 @@ import { ForbiddenError } from "../errors/ForbiddenError";
 import { NotFoundError } from "../errors/NotFoundError";
 import { UnauthorizedError } from "../errors/UnaouthorizedError";
 import { Comment, PostCommentDB } from "../models/Comment";
+import { Post } from "../models/Post";
 import { IdGenerator } from "../services/IdGenerator";
 import { TokenManager } from "../services/TokenManeger";
 
@@ -61,6 +62,24 @@ export class CommentBusiness {
     };
 
     await this.commentDatabase.insertPostComment(newPostCommentDB);
+
+    console.log(postIdExists)
+    const updatePostIdExists = new Post(
+      postIdExists.id,
+      postIdExists.post_content,
+      postIdExists.likes,
+      postIdExists.dislikes,
+      postIdExists.comments,
+      postIdExists.created_at,
+      postIdExists.creator_id,
+      postIdExists.creator_name
+    );
+
+    updatePostIdExists.addComment();
+    console.log(postIdExists)
+
+    const updatePostIdExistsDB = updatePostIdExists.toDBModel();
+    await this.postDatabase.editPost(updatePostIdExistsDB);
 
     const output: CreateCommentOutputDTO = {
       message: "Comment created",
