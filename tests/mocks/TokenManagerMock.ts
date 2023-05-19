@@ -6,6 +6,8 @@ export class TokenManagerMock {
       return "token-mock";
     } else if (payload.id === "id-mock-normal") {
       return "token-mock-normal";
+    } else if (payload.id === "id-mock-normal2") {
+      return "token-mock-normal2";
     } else {
       return "token-mock-admin";
     }
@@ -16,6 +18,12 @@ export class TokenManagerMock {
       return {
         id: "id-mock-normal",
         name: "User",
+        role: USER_ROLES.NORMAL,
+      };
+    } else if (token === "token-mock-normal2") {
+      return {
+        id: "id-mock-normal2",
+        name: "User2",
         role: USER_ROLES.NORMAL,
       };
     } else if (token === "token-mock-admin") {
