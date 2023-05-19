@@ -26,11 +26,11 @@ export interface PostCommentDB {
 export interface PostCommentModel {
   postId: string;
   creatorId: string;
-  name: number;
-  commentId: number;
+  name: string;
+  commentId: string;
   commentContent: string;
-  likes: string;
-  dislikes: string;
+  likes: number;
+  dislikes: number;
 }
 
 export class Comment {
