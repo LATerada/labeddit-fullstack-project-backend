@@ -11,7 +11,7 @@ describe("CreatePost tests", () => {
     new TokenManagerMock()
   );
 
-  test("", async () => {
+  test("Must send a message when create post", async () => {
     const input = CreatePostSchema.parse({
       token: "token-mock-normal",
       content: "Hello World!",

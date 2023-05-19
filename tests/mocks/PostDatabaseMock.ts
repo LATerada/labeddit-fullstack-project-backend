@@ -13,11 +13,11 @@ const postModelMock: PostModel[] = [
     postContent: "Hello World!",
     likes: 1,
     dislikes: 0,
-    comments: 2,
+    comments: 0,
     createdAt: "2023-05-19T11:55:00.924Z",
     creator: {
-      id: "990b55b5-5b6f-4f55-a7b7-db307dcbe15a",
-      name: "User1",
+      id: "id-mock-normal",
+      name: "User",
     },
   },
   {
@@ -25,10 +25,10 @@ const postModelMock: PostModel[] = [
     postContent: "What do you think about ChatGPT?",
     likes: 1,
     dislikes: 0,
-    comments: 1,
+    comments: 0,
     createdAt: "2023-05-19T11:59:43.426Z",
     creator: {
-      id: "fd24e8bc-dedb-48ed-a3b7-c65828fc8ff5",
+      id: "id-mock",
       name: "User2",
     },
   },
@@ -42,7 +42,7 @@ const postDBMock: PostDBWithCreatorName[] = [
     likes: 1,
     dislikes: 0,
     comments: 0,
-    created_at: expect.any(String),
+    created_at: "2023-05-19T11:55:00.924Z",
     creator_name: "User",
   },
   {
@@ -52,10 +52,11 @@ const postDBMock: PostDBWithCreatorName[] = [
     likes: 1,
     dislikes: 0,
     comments: 0,
-    created_at: expect.any(String),
+    created_at: "2023-05-19T11:59:43.426Z",
     creator_name: "User2",
   },
 ];
+
 const likeDislikePostDBMock: LikeDislikePostDB[] = [
   {
     user_id: "id-mock-normal",
