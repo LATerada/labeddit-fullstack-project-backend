@@ -1,7 +1,7 @@
 import { UserBusiness } from "../../../src/business/UserBusiness";
 import { UserDatabaseMock } from "../../mocks/UserDatabaseMock";
 import { IdGeneratorMock } from "../../mocks/IdGeneratorMock";
-import { TokenManagerMock } from "../../mocks/TokenManegerMock";
+import { TokenManagerMock } from "../../mocks/TokenManagerMock";
 import { HashManagerMock } from "../../mocks/HashManegerMock";
 import { LoginSchema } from "../../../src/dtos/user/login.dto";
 

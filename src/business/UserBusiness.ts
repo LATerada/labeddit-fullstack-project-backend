@@ -6,13 +6,13 @@ import { ConflictError } from "../errors/ConflictError";
 import { TokenPayload, User, USER_ROLES } from "../models/User";
 import { HashManager } from "../services/HashManeger";
 import { IdGenerator } from "../services/IdGenerator";
-import { TokenManager } from "../services/TokenManeger";
+import { TokenManager } from "../services/TokenManager";
 
 export class UserBusiness {
   constructor(
     private userDatabase: UserDatabase,
     private idGenerator: IdGenerator,
-    private tokenManeger: TokenManager,
+    private tokenManager: TokenManager,
     private hashManeger: HashManager
   ) {}
 
@@ -46,7 +46,7 @@ export class UserBusiness {
       role: newUser.getRole(),
     };
 
-    const token = this.tokenManeger.createToken(payload);
+    const token = this.tokenManager.createToken(payload);
 
     const output: SignupOutputDTO = {
       token,
@@ -88,7 +88,7 @@ export class UserBusiness {
       role: user.getRole(),
     };
 
-    const token = this.tokenManeger.createToken(payload);
+    const token = this.tokenManager.createToken(payload);
 
     const output: LoginOutputDTO = {
       token,

@@ -13,13 +13,13 @@ import { NotFoundError } from "../errors/NotFoundError";
 import { UnauthorizedError } from "../errors/UnaouthorizedError";
 import { LikeDislikePostDB, Post, POST_LIKE } from "../models/Post";
 import { IdGenerator } from "../services/IdGenerator";
-import { TokenManager } from "../services/TokenManeger";
+import { TokenManager } from "../services/TokenManager";
 
 export class PostBusiness {
   constructor(
     private postDatabase: PostDatabase,
     private idGenerator: IdGenerator,
-    private tokenManeger: TokenManager
+    private tokenManager: TokenManager
   ) {}
 
   public createPost = async (
@@ -27,7 +27,7 @@ export class PostBusiness {
   ): Promise<CreatePostOutputDTO> => {
     const { token, content } = input;
 
-    const payload = this.tokenManeger.getPayload(token);
+    const payload = this.tokenManager.getPayload(token);
 
     if (!payload) {
       throw new UnauthorizedError("Invalid token");
@@ -61,7 +61,7 @@ export class PostBusiness {
   ): Promise<GetPostsOutputDTO> => {
     const { token } = input;
 
-    const payload = this.tokenManeger.getPayload(token);
+    const payload = this.tokenManager.getPayload(token);
 
     if (!payload) {
       throw new UnauthorizedError("Invalid token");
@@ -96,7 +96,7 @@ export class PostBusiness {
   ): Promise<LikeOrDislikePostOutputDTO> => {
     const { token, idToLikeOrDislike, like } = input;
 
-    const payload = this.tokenManeger.getPayload(token);
+    const payload = this.tokenManager.getPayload(token);
 
     if (!payload) {
       throw new UnauthorizedError("Invalid token");

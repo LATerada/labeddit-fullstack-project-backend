@@ -2,7 +2,7 @@ import { UserBusiness } from "../../../src/business/UserBusiness";
 import { SignupSchema } from "../../../src/dtos/user/signup.dto";
 import { UserDatabaseMock } from "../../mocks/UserDatabaseMock";
 import { IdGeneratorMock } from "../../mocks/IdGeneratorMock";
-import { TokenManagerMock } from "../../mocks/TokenManegerMock";
+import { TokenManagerMock } from "../../mocks/TokenManagerMock";
 import { HashManagerMock } from "../../mocks/HashManegerMock";
 
 describe("Signup tests", () => {
