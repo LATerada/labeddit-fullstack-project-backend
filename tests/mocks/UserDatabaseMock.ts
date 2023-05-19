@@ -20,7 +20,7 @@ const usersMock: UserDB[] = [
   },
 ];
 
-export class UserDatabase extends BaseDatabase {
+export class UserDatabaseMock extends BaseDatabase {
   public static TABLE_USERS = "users";
 
   public insertUser = async (newUser: UserDB): Promise<void> => {};
@@ -28,10 +28,6 @@ export class UserDatabase extends BaseDatabase {
   public findUserByEmail = async (
     email: string
   ): Promise<UserDB | undefined> => {
-    const [userDB]: UserDB[] | undefined[] = await BaseDatabase.connection(
-      UserDatabase.TABLE_USERS
-    ).where({ email });
-
-    return userDB;
+    return usersMock.filter((user) => user.email === email)[0];
   };
 }
