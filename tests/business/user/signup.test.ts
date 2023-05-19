@@ -15,9 +15,9 @@ describe("Signup tests", () => {
 
   test("Must generate token when registering", async () => {
     const input = SignupSchema.parse({
-      name: "User2",
-      email: "user2@email.com",
-      password: "user2023",
+      name: "User3",
+      email: "user3@email.com",
+      password: "user321",
     });
 
     const output = await userBusiness.signup(input);

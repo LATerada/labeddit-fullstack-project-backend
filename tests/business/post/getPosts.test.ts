@@ -22,10 +22,10 @@ describe("GetPosts tests", () => {
         {
           id: "post-id-mock",
           postContent: "Hello World!",
-          likes: 1,
-          dislikes: 0,
+          likes: 0,
+          dislikes: 1,
           comments: 0,
-          createdAt: expect.any(String),
+          createdAt: "2023-05-19T11:55:00.924Z",
           creator: {
             id: "id-mock-normal",
             name: "User",
@@ -37,10 +37,10 @@ describe("GetPosts tests", () => {
           likes: 1,
           dislikes: 0,
           comments: 0,
-          createdAt: expect.any(String),
+          createdAt: "2023-05-19T11:59:43.426Z",
           creator: {
-            id: "id-mock",
-            name: "User2",
+            id: "id-mock-admin",
+            name: "Admin",
           },
         },
       ],
