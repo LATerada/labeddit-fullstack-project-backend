@@ -16,7 +16,6 @@ export interface PostDBWithCreatorName {
   dislikes: number;
   comments: number;
   created_at: string;
-  updated_at: string;
   creator_name: string;
 }
 

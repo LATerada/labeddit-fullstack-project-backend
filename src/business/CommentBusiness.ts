@@ -24,14 +24,14 @@ import {
 } from "../models/Comment";
 import { Post } from "../models/Post";
 import { IdGenerator } from "../services/IdGenerator";
-import { TokenManager } from "../services/TokenManeger";
+import { TokenManager } from "../services/TokenManager";
 
 export class CommentBusiness {
   constructor(
     private commentDatabase: CommentDatabase,
     private postDatabase: PostDatabase,
     private idGenerator: IdGenerator,
-    private tokenManeger: TokenManager
+    private tokenManager: TokenManager
   ) {}
 
   public createComment = async (
@@ -39,7 +39,7 @@ export class CommentBusiness {
   ): Promise<CreateCommentOutputDTO> => {
     const { token, postId, content } = input;
 
-    const payload = this.tokenManeger.getPayload(token);
+    const payload = this.tokenManager.getPayload(token);
 
     if (!payload) {
       throw new UnauthorizedError("Invalid token");
@@ -103,7 +103,7 @@ export class CommentBusiness {
   ): Promise<GetCommentsOutputDTO> => {
     const { token, postId } = input;
 
-    const payload = this.tokenManeger.getPayload(token);
+    const payload = this.tokenManager.getPayload(token);
 
     if (!payload) {
       throw new UnauthorizedError("Invalid token");
@@ -133,7 +133,7 @@ export class CommentBusiness {
   ): Promise<LikeOrDislikeCommentOutputDTO> => {
     const { token, idToLikeOrDislike, like } = input;
 
-    const payload = this.tokenManeger.getPayload(token);
+    const payload = this.tokenManager.getPayload(token);
 
     if (!payload) {
       throw new UnauthorizedError("Invalid token");

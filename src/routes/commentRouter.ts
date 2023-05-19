@@ -4,7 +4,7 @@ import { CommentController } from "../controller/CommentController";
 import { CommentDatabase } from "../database/CommentDatabase";
 import { PostDatabase } from "../database/PostDatabase";
 import { IdGenerator } from "../services/IdGenerator";
-import { TokenManager } from "../services/TokenManeger";
+import { TokenManager } from "../services/TokenManager";
 
 export const commentRouter = express.Router();
 
