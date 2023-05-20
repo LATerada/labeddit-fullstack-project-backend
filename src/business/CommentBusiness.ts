@@ -60,7 +60,8 @@ export class CommentBusiness {
       0,
       0,
       new Date().toISOString(),
-      payload.id
+      payload.id,
+      payload.name
     );
 
     const newCommentDB = newComment.toDBModel();
@@ -138,18 +139,13 @@ export class CommentBusiness {
       throw new UnauthorizedError("Invalid token");
     }
 
-    const commentIdExists = await this.commentDatabase.findCommentsById(
-      idToLikeOrDislike
-    );
+    const commentIdExists =
+      await this.commentDatabase.findCommentsWithCreatorNameById(
+        idToLikeOrDislike
+      );
 
     if (!commentIdExists) {
-      throw new NotFoundError("Invalid comment id");
-    }
-
-    if (payload.id === commentIdExists.creator_id) {
-      throw new ForbiddenError(
-        "The comment creator can not give likes or dislikes"
-      );
+      throw new NotFoundError("Comment not found id");
     }
 
     const comment = new Comment(
@@ -158,9 +154,15 @@ export class CommentBusiness {
       commentIdExists.likes,
       commentIdExists.dislikes,
       commentIdExists.created_at,
-      commentIdExists.creator_id
+      commentIdExists.creator_id,
+      commentIdExists.creator_name
     );
 
+    if (payload.id === comment.getId()) {
+      throw new ForbiddenError(
+        "The comment creator can not give likes or dislikes"
+      );
+    }
     const likeSQLite = like ? 1 : 0;
 
     const likeOrDislikeDB: LikeDislikeCommentDB = {

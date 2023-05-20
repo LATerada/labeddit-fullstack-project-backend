@@ -7,6 +7,28 @@ export interface CommentDB {
   created_at: string;
 }
 
+export interface CommentDBWithCreatorName {
+  id: string;
+  comment_content: string;
+  likes: number;
+  dislikes: number;
+  created_at: string;
+  creator_id: string;
+  creator_name: string;
+}
+
+export interface CommentModel {
+  id: string;
+  commentContent: string;
+  likes: number;
+  dislikes: number;
+  createdAt: string;
+  creator: {
+    id: string;
+    name: string;
+  };
+}
+
 export interface LikeDislikeCommentDB {
   user_id: string;
   comment_id: string;
@@ -41,6 +63,7 @@ export class Comment {
     private dislikes: number,
     private createdAt: string,
     private creatorId: string,
+    private creatorName: string
   ) {}
 
   public getId(): string {
@@ -91,6 +114,13 @@ export class Comment {
     this.creatorId = value;
   }
 
+  public getCreatorName(): string {
+    return this.creatorId;
+  }
+  public setCreatorName(value: string) {
+    this.creatorId = value;
+  }
+
   public toDBModel(): CommentDB {
     return {
       id: this.id,
@@ -99,6 +129,20 @@ export class Comment {
       likes: this.likes,
       dislikes: this.dislikes,
       created_at: this.createdAt,
+    };
+  }
+
+  public toBusinessModel(): CommentModel {
+    return {
+      id: this.id,
+      commentContent: this.commentContent,
+      likes: this.likes,
+      dislikes: this.dislikes,
+      createdAt: this.createdAt,
+      creator: {
+        id: this.creatorId,
+        name: this.creatorName,
+      },
     };
   }
 }

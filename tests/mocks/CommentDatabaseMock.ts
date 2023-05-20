@@ -1,5 +1,6 @@
 import {
   CommentDB,
+  CommentDBWithCreatorName,
   COMMENT_LIKE,
   LikeDislikeCommentDB,
   PostCommentDB,
@@ -25,6 +26,27 @@ const commentsDBMock: PostCommentModel[] = [
     commentContent: "Haaaaaalo!.",
     likes: 0,
     dislikes: 1,
+  },
+];
+
+const commentsDBWithCreatorNameMock: CommentDBWithCreatorName[] = [
+  {
+    id: "comment-id-mock",
+    comment_content: "<Hello></Hello>",
+    likes: 1,
+    dislikes: 0,
+    created_at: "date-time-mock",
+    creator_id: "id-mock-admin",
+    creator_name: "Admin",
+  },
+  {
+    id: "comment-id-mock2",
+    comment_content: "Haaaaaalo!.",
+    likes: 0,
+    dislikes: 1,
+    created_at: "date-time-mock",
+    creator_id: "id-mock-normal",
+    creator_name: "User",
   },
 ];
 
@@ -61,26 +83,24 @@ export class CommentDatabaseMock extends BaseDatabase {
     return result as PostCommentModel[];
   };
 
-  public findCommentsById = async (
+  public findCommentsWithCreatorNameById = async (
     id: string
-  ): Promise<CommentDB | undefined> => {
-    const commentDB = commentsDBMock.find(
-      (commentDB) => commentDB.commentId === id
+  ): Promise<CommentDBWithCreatorName | undefined> => {
+    const result = commentsDBWithCreatorNameMock.find(
+      (commentDB) => commentDB.id === id
     );
-    return commentDB as CommentDB | undefined;
+    return result as CommentDBWithCreatorName | undefined;
   };
-  
+
   public findLikeOrDislikeComment = async (
     likeOrDislikeComment: LikeDislikeCommentDB
   ): Promise<COMMENT_LIKE | undefined> => {
-    console.log(likeDislikeCommentDBMock);
+
     const result = likeDislikeCommentDBMock.find(
       (likeDislikeMock) =>
         likeDislikeMock.comment_id === likeOrDislikeComment.comment_id &&
         likeDislikeMock.user_id === likeOrDislikeComment.user_id
     );
-
-    console.log(result);
 
     if (result === undefined) {
       return undefined;

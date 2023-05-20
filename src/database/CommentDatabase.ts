@@ -1,5 +1,6 @@
 import {
   CommentDB,
+  CommentDBWithCreatorName,
   COMMENT_LIKE,
   LikeDislikeCommentDB,
   PostCommentDB,
@@ -60,15 +61,32 @@ export class CommentDatabase extends BaseDatabase {
     return result;
   };
 
-  public findCommentsById = async (
+  public findCommentsWithCreatorNameById = async (
     id: string
-  ): Promise<CommentDB | undefined> => {
-    const [commentDB]: CommentDB[] | undefined[] =
-      await BaseDatabase.connection(CommentDatabase.TABLE_COMMENTS).where({
+  ): Promise<CommentDBWithCreatorName | undefined> => {
+    const [result] = await BaseDatabase.connection(
+      CommentDatabase.TABLE_COMMENTS
+    )
+      .select(
+        `${CommentDatabase.TABLE_COMMENTS}.id`,
+        `${CommentDatabase.TABLE_COMMENTS}.comment_content`,
+        `${CommentDatabase.TABLE_COMMENTS}.likes`,
+        `${CommentDatabase.TABLE_COMMENTS}.dislikes`,
+        `${CommentDatabase.TABLE_COMMENTS}.created_at`,
+        `${UserDatabase.TABLE_USERS}.id as creator_id`,
+        `${UserDatabase.TABLE_USERS}.name as creator_name`
+      )
+      .join(
+        `${UserDatabase.TABLE_USERS}`,
+        `${CommentDatabase.TABLE_COMMENTS}.creator_id`,
+        "=",
+        `${UserDatabase.TABLE_USERS}.id`
+      )
+      .where({
         id,
       });
 
-    return commentDB;
+    return result as CommentDBWithCreatorName | undefined;
   };
 
   public findLikeOrDislikeComment = async (
@@ -104,11 +122,13 @@ export class CommentDatabase extends BaseDatabase {
 
   public updateLikeOrDislike = async (
     likeOrDislike: LikeDislikeCommentDB
-  ): Promise<void>  => {
-    await BaseDatabase.connection(CommentDatabase.TABLE_LIKES_DISLIKES_COMMENTS).update(likeOrDislike).where({
-      user_id: likeOrDislike.user_id,
-      comment_id: likeOrDislike.comment_id,
-    })
+  ): Promise<void> => {
+    await BaseDatabase.connection(CommentDatabase.TABLE_LIKES_DISLIKES_COMMENTS)
+      .update(likeOrDislike)
+      .where({
+        user_id: likeOrDislike.user_id,
+        comment_id: likeOrDislike.comment_id,
+      });
   };
 
   public insertLikeOrDislike = async (
