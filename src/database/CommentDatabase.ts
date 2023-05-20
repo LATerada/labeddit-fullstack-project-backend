@@ -71,15 +71,15 @@ export class CommentDatabase extends BaseDatabase {
     return commentDB;
   };
 
-  public findLikeOrDislikePost = async (
-    likeOrDislikeDB: LikeDislikeCommentDB
+  public findLikeOrDislikeComment = async (
+    likeOrDislike: LikeDislikeCommentDB
   ): Promise<COMMENT_LIKE | undefined> => {
     const [result]: LikeDislikeCommentDB[] | undefined[] =
       await BaseDatabase.connection(
         CommentDatabase.TABLE_LIKES_DISLIKES_COMMENTS
       ).where({
-        user_id: likeOrDislikeDB.user_id,
-        comment_id: likeOrDislikeDB.comment_id,
+        user_id: likeOrDislike.user_id,
+        comment_id: likeOrDislike.comment_id,
       });
 
     if (result === undefined) {

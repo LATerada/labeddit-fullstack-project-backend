@@ -93,12 +93,12 @@ export class PostDatabaseMock extends BaseDatabase {
   public editPost = async (newPost: PostDB): Promise<void> => {};
 
   public findLikeOrDislikePost = async (
-    likeDislikePostDB: LikeDislikePostDB
+    likeDislikePost: LikeDislikePostDB
   ): Promise<POST_LIKE | undefined> => {
     const result = likeDislikePostDBMock.find(
       (likeDislikeMock) =>
-        likeDislikeMock.user_id === likeDislikePostDB.user_id &&
-        likeDislikeMock.post_id === likeDislikePostDB.post_id
+        likeDislikeMock.user_id === likeDislikePost.user_id &&
+        likeDislikeMock.post_id === likeDislikePost.post_id
     );
 
     if (result === undefined) {
