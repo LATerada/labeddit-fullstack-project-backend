@@ -86,7 +86,7 @@ export class PostDatabaseMock extends BaseDatabase {
   public findPostsWithCreatorNameById = async (
     id: string
   ): Promise<PostDBWithCreatorName | undefined> => {
-    const result = postModelMock.find((post) => post.id === id);
+    const result = postDBMock.find((post) => post.id === id);
     return result as PostDBWithCreatorName | undefined;
   };
 
