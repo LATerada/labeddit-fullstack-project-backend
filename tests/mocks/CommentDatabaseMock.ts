@@ -28,17 +28,6 @@ const commentsDBMock: PostCommentModel[] = [
   },
 ];
 
-const postCommentDBMock: PostCommentDB[] = [
-  {
-    post_id: "post-id-mock",
-    comment_id: "comment-id-mock",
-  },
-  {
-    post_id: "post-id-mock",
-    comment_id: "comment-id-mock2",
-  },
-];
-
 const likeDislikeCommentDBMock: LikeDislikeCommentDB[] = [
   {
     user_id: "id-mock-normal",
@@ -80,15 +69,18 @@ export class CommentDatabaseMock extends BaseDatabase {
     );
     return commentDB as CommentDB | undefined;
   };
-
-  public findLikeOrDislikePost = async (
-    likeOrDislike: LikeDislikeCommentDB
+  
+  public findLikeOrDislikeComment = async (
+    likeOrDislikeComment: LikeDislikeCommentDB
   ): Promise<COMMENT_LIKE | undefined> => {
+    console.log(likeDislikeCommentDBMock);
     const result = likeDislikeCommentDBMock.find(
-      (likeDislikeCommentMock) =>
-        likeDislikeCommentMock.comment_id === likeOrDislike.comment_id &&
-        likeDislikeCommentMock.user_id === likeOrDislike.user_id
+      (likeDislikeMock) =>
+        likeDislikeMock.comment_id === likeOrDislikeComment.comment_id &&
+        likeDislikeMock.user_id === likeOrDislikeComment.user_id
     );
+
+    console.log(result);
 
     if (result === undefined) {
       return undefined;

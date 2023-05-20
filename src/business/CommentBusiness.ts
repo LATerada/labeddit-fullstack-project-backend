@@ -12,7 +12,6 @@ import {
   LikeOrDislikeCommentInputDTO,
   LikeOrDislikeCommentOutputDTO,
 } from "../dtos/comment/likeOrDislikeComment.dto";
-import { BadRequestError } from "../errors/BadRequestError";
 import { ForbiddenError } from "../errors/ForbiddenError";
 import { NotFoundError } from "../errors/NotFoundError";
 import { UnauthorizedError } from "../errors/UnaouthorizedError";
@@ -171,7 +170,7 @@ export class CommentBusiness {
     };
 
     const likeOrDislikeCommentExists =
-      await this.commentDatabase.findLikeOrDislikePost(likeOrDislikeDB);
+      await this.commentDatabase.findLikeOrDislikeComment(likeOrDislikeDB);
 
     if (likeOrDislikeCommentExists === COMMENT_LIKE.ALREADY_LIKED) {
       if (like) {

@@ -71,7 +71,7 @@ export class CommentDatabase extends BaseDatabase {
     return commentDB;
   };
 
-  public findLikeOrDislikePost = async (
+  public findLikeOrDislikeComment = async (
     likeOrDislike: LikeDislikeCommentDB
   ): Promise<COMMENT_LIKE | undefined> => {
     const [result]: LikeDislikeCommentDB[] | undefined[] =
