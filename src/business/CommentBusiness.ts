@@ -145,7 +145,7 @@ export class CommentBusiness {
       );
 
     if (!commentIdExists) {
-      throw new NotFoundError("Comment not found id");
+      throw new NotFoundError("Comment not found");
     }
 
     const comment = new Comment(
@@ -158,7 +158,7 @@ export class CommentBusiness {
       commentIdExists.creator_name
     );
 
-    if (payload.id === comment.getId()) {
+    if (payload.id === comment.getCreatorId()) {
       throw new ForbiddenError(
         "The comment creator can not give likes or dislikes"
       );
