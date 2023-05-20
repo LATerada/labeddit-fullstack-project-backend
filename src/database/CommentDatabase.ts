@@ -83,7 +83,7 @@ export class CommentDatabase extends BaseDatabase {
         `${UserDatabase.TABLE_USERS}.id`
       )
       .where({
-        id,
+        [`${CommentDatabase.TABLE_COMMENTS}.id`]: id,
       });
 
     return result as CommentDBWithCreatorName | undefined;
