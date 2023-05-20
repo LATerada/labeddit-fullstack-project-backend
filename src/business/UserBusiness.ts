@@ -77,8 +77,7 @@ export class UserBusiness {
       password,
       userDBExists.password
     );
-    console.log(password,userDBExists.password)
-    console.log(hashedPassword)
+
     if (!hashedPassword) {
       throw new BadRequestError("email or password invalid");
     }

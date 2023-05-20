@@ -3,6 +3,7 @@ import { PostDatabaseMock } from "../../mocks/PostDatabaseMock";
 import { IdGeneratorMock } from "../../mocks/IdGeneratorMock";
 import { TokenManagerMock } from "../../mocks/TokenManagerMock";
 import { GetPostsSchema } from "../../../src/dtos/post/getPosts.dto";
+import { UnauthorizedError } from "../../../src/errors/UnaouthorizedError";
 
 describe("GetPosts tests", () => {
   const postBusiness = new PostBusiness(
@@ -45,5 +46,21 @@ describe("GetPosts tests", () => {
         },
       ],
     });
+  });
+
+  test("Must return error when token is invalid", async () => {
+    expect.assertions(2);
+    try {
+      const input = GetPostsSchema.parse({
+        token: "invalid-token",
+      });
+
+      const output = await postBusiness.getPosts(input);
+    } catch (error) {
+      if (error instanceof UnauthorizedError) {
+        expect(error.statusCode).toBe(401);
+        expect(error.message).toBe("Invalid token");
+      }
+    }
   });
 });

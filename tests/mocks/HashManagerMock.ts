@@ -8,8 +8,11 @@ export class HashManagerMock {
     hash: string
   ): Promise<boolean> => {
     switch (plaintext) {
+      case "user223":
+        return hash === "hash-mock-user2";
+
       case "user123":
-        return hash === "hash-mock-normal";
+        return hash === "hash-mock-user";
 
       case "admin000":
         return hash === "hash-mock-admin";
