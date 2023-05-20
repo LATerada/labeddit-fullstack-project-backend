@@ -2,7 +2,7 @@ import { UserBusiness } from "../../../src/business/UserBusiness";
 import { UserDatabaseMock } from "../../mocks/UserDatabaseMock";
 import { IdGeneratorMock } from "../../mocks/IdGeneratorMock";
 import { TokenManagerMock } from "../../mocks/TokenManagerMock";
-import { HashManagerMock } from "../../mocks/HashManegerMock";
+import { HashManagerMock } from "../../mocks/HashManagerMock";
 import { LoginSchema } from "../../../src/dtos/user/login.dto";
 import { BadRequestError } from "../../../src/errors/BadRequestError";
 
@@ -45,22 +45,21 @@ describe("Login tests", () => {
     }
   });
 
-  test("Must return error if password is incorrect",async () => {
-    expect.assertions(2)
+  test("Must return error if password is incorrect", async () => {
+    expect.assertions(2);
 
     try {
       const input = LoginSchema.parse({
         email: "user@email.com",
         password: "incorrect-password",
       });
-  
+
       const output = await userBusiness.login(input);
-  
     } catch (error) {
-      if(error instanceof BadRequestError){
-        expect(error.statusCode).toBe(400)
-        expect(error.message).toBe("email or password invalid")
+      if (error instanceof BadRequestError) {
+        expect(error.statusCode).toBe(400);
+        expect(error.message).toBe("email or password invalid");
       }
     }
-  })
+  });
 });

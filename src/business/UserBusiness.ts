@@ -4,7 +4,7 @@ import { SignupInputDTO, SignupOutputDTO } from "../dtos/user/signup.dto";
 import { BadRequestError } from "../errors/BadRequestError";
 import { ConflictError } from "../errors/ConflictError";
 import { TokenPayload, User, USER_ROLES } from "../models/User";
-import { HashManager } from "../services/HashManeger";
+import { HashManager } from "../services/HashManager";
 import { IdGenerator } from "../services/IdGenerator";
 import { TokenManager } from "../services/TokenManager";
 
@@ -13,7 +13,7 @@ export class UserBusiness {
     private userDatabase: UserDatabase,
     private idGenerator: IdGenerator,
     private tokenManager: TokenManager,
-    private hashManeger: HashManager
+    private hashManager: HashManager
   ) {}
 
   public signup = async (input: SignupInputDTO): Promise<SignupOutputDTO> => {
@@ -26,7 +26,7 @@ export class UserBusiness {
     }
 
     const id = this.idGenerator.generate();
-    const hashedPassword = await this.hashManeger.hash(password);
+    const hashedPassword = await this.hashManager.hash(password);
 
     const newUser = new User(
       id,
@@ -73,11 +73,12 @@ export class UserBusiness {
       userDBExists.created_at
     );
 
-    const hashedPassword = this.hashManeger.compare(
+    const hashedPassword = await this.hashManager.compare(
       password,
       userDBExists.password
     );
-
+    console.log(password,userDBExists.password)
+    console.log(hashedPassword)
     if (!hashedPassword) {
       throw new BadRequestError("email or password invalid");
     }
