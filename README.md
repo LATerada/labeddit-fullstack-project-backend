@@ -46,7 +46,7 @@ https://dbdiagram.io/d/64696e74dca9fb07c4752ed0
 
 
 ## 🌐 Render Deploy
-[Deploy Link]((https://labeddit-fullstack-project-backend.onrender.com)
+[Deploy Link](https://labeddit-fullstack-project-backend.onrender.com)
 
 
 ## 💻 How to Install and Run the Project
