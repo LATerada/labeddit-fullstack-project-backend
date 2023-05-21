@@ -32,7 +32,7 @@ The project was developed from the creation of an API, interaction with the data
 
 ## 💿 Database
 
-![labeddit-database](labeddit-database.png)
+![labeddit-database](./assets/labeddit-database.png)
 
 https://dbdiagram.io/d/64696e74dca9fb07c4752ed0
 
