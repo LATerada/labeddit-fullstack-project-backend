@@ -1,4 +1,4 @@
-# [📲 Labeddit FullStack Project - Backend ](https://labeddit-fullstack-project-backend.onrender.com)
+# 📲 Labeddit FullStack Project - Backend 
 
 
 🚩 [Labeddit FullStack Project - Frontend](https://github.com/LATerada/labeddit-fullstack-project-frontend)
