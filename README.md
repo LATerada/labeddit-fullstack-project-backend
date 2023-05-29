@@ -59,6 +59,7 @@ $ git clone linkrepo
 $ cd labeddit-fullstack-project-backend
 
 # Create a .env file using the .env.example as reference
+at the root directory
 
 # Install dependêncies
 $ npm install && npm run build
