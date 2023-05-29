@@ -55,11 +55,13 @@ https://dbdiagram.io/d/64696e74dca9fb07c4752ed0
 # Clone this repository
 $ git clone linkrepo
 
-# Acesse the folder in you terminal
+# Access the folder in you terminal
 $ cd labeddit-fullstack-project-backend
 
+# Create a .env file using the .env.example as reference
+
 # Install dependêncies
-$ npm install
+$ npm install && npm run build
 
 # Execute the application
 $ npm run start
